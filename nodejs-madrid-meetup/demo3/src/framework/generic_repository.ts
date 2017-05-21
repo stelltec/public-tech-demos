@@ -2,12 +2,7 @@ import { injectable, unmanaged } from "inversify";
 import { Schema, Document, Model, SchemaDefinition } from "mongoose";
 import { dbClient } from "./ioc";
 import { DbClient } from "./database";
-
-export interface Repository<T> {
-    save(doc: T): Promise<T>;
-    findAll(): Promise<T[]>;
-    findById(id: string): Promise<T>;
-}
+import { Repository } from "./interfaces";
 
 @injectable()
 export class GenericRepository<TModel extends Document> implements Repository<TModel> {

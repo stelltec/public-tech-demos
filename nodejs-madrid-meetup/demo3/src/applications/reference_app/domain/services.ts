@@ -1,5 +1,5 @@
-import { Repository } from "../../../framework/generic_repository";
-import { Movie, Actor, Director } from "./entities";
+import { Repository } from "../../../framework/interfaces";
+import { Movie, Actor, Director } from "./model";
 
 export type MovieRepository = Repository<Movie>;
 export type ActorRepository = Repository<Actor>;

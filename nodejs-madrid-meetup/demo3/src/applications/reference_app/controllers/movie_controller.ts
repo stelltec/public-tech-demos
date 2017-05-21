@@ -1,14 +1,13 @@
 import { injectable } from "inversify";
 import { Controller, Get, RequestParam } from "inversify-express-utils";
 import { movieRepository } from "../constants/decorators";
-import { Repository } from "../../../framework/generic_repository";
-import { Movie } from "../domain/entities";
+import { MovieRepository } from "../domain/services";
 
 @injectable()
-@Controller("/api/ref/movie")
+@Controller("/api/ref/movies")
 export class MovieController {
 
-    @movieRepository public _movieRepository: Repository<Movie>;
+    @movieRepository public _movieRepository: MovieRepository;
 
     @Get("/")
     public async get() {

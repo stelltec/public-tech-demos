@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import { DbClient } from "../../../framework/database";
 import { dbClient } from "../../../framework/ioc";
 import { GenericRepository } from "../../../framework/generic_repository";
-import { Movie } from "../domain/entities";
+import { Movie } from "../domain/model";
 
 @injectable()
 export class MovieRepository extends GenericRepository<Movie> {
