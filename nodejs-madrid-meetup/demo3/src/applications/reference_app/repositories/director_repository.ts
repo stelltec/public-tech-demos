@@ -12,11 +12,10 @@ export class DirectorRepository extends GenericRepository<Director> {
         super(
             "Directors",
             {
-                title: String,
-                releaseYear: Number,
-                releaseMonth: Number,
-                releaseDay: Number,
-                summary: String
+                name: String,
+                yearBorn: Number,
+                nationality: String,
+                movies: [String]
             },
             dbClient
         );

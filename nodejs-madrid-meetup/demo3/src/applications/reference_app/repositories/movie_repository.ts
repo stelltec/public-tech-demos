@@ -16,7 +16,9 @@ export class MovieRepository extends GenericRepository<Movie> {
                 releaseYear: Number,
                 releaseMonth: Number,
                 releaseDay: Number,
-                summary: String
+                summary: String,
+                actors: [String],
+                directors: [String]
             },
             dbClient
         );
