@@ -1,5 +1,17 @@
 import "reflect-metadata";
-import { someAppModule } from "./applications/some_app";
 import { bootstrap } from "./framework/bootstrap";
 
-bootstrap(8080, someAppModule);
+// Import apps
+import { referenceAppModule } from "./applications/reference_app";
+import { ticketingAppModule } from "./applications/ticketing_app";
+
+// Start app
+(async () => {
+    await bootstrap(
+        process.env.APP_PORT || 8080,
+        process.env.DB_HOST || "localhost",
+        process.env.DB_NAME || "demo",
+        referenceAppModule,
+        ticketingAppModule
+    );
+})();
