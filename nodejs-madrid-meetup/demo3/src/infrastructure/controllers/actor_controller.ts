@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Controller, Get, RequestParam } from "inversify-express-utils";
-import { actorRepository } from "../constants/decorators";
-import { ActorRepository } from "../domain/services";
+import { actorRepository } from "../ioc/decorators";
+import { ActorRepository } from "../../domain/interfaces/repositories";
 
 @injectable()
 @Controller("/api/ref/actors")
@@ -11,16 +11,14 @@ export class ActorController {
 
     @Get("/")
     public async get() {
-        let results = await this._actorRepository.findAll();
-        return results ? results.map(r => r.toJSON()) : [];
+        return await this._actorRepository.findAll();
     }
 
     @Get("/:id")
     public async getById(
         @RequestParam("id") id: string,
     ) {
-        let result = await this._actorRepository.findById(id);
-        return result ? result.toJSON() : null;
+        return await this._actorRepository.findById(id);
     }
 
 }

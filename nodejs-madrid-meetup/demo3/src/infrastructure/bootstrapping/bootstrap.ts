@@ -2,9 +2,9 @@ import { Container, ContainerModule } from "inversify";
 import { InversifyExpressServer } from "inversify-express-utils";
 import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
-import { DbClient, getDatabaseClient } from "./database";
-import { TYPES } from "./ioc";
 import { reqMiddleware, exceptionLoggerMiddleware } from "./middleware";
+import { DbClient, getDatabaseClient } from "../database/database";
+import { TYPES } from "../ioc/types";
 
 export async function bootstrap(
     appPort: number,

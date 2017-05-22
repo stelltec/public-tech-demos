@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json -inlineSourceMap -outDir private",
+    "start": "npm run build && npm run debug",
     "debug": "node --inspect private/index.js"
   },
   "keywords": [],

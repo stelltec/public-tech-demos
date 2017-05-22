@@ -1,9 +1,6 @@
 import "reflect-metadata";
-import { bootstrap } from "./framework/bootstrap";
-
-// Import apps
-import { referenceAppModule } from "./applications/reference_app";
-import { ticketingAppModule } from "./applications/ticketing_app";
+import { bootstrap } from "./infrastructure/bootstrapping/bootstrap";
+import { referenceDataIoCModule } from "./infrastructure/ioc/modules";
 
 // Start app
 (async () => {
@@ -11,7 +8,6 @@ import { ticketingAppModule } from "./applications/ticketing_app";
         process.env.APP_PORT || 8080,
         process.env.DB_HOST || "localhost",
         process.env.DB_NAME || "demo",
-        referenceAppModule,
-        ticketingAppModule
+        referenceDataIoCModule
     );
 })();
