@@ -5,8 +5,7 @@ import { dbClient } from "../../../domain/constants/decorators";
 import { Repository } from "../../../domain/interfaces/repositories";
 
 @injectable()
-export class GenericRepository<TEntity, TModel
-    extends Document>
+export class GenericRepository<TEntity, TModel extends Document>
     implements Repository<TEntity> {
         
         private _name: string;
@@ -62,6 +61,17 @@ export class GenericRepository<TEntity, TModel
                     resolve(this._readMapper(res));
                 });
             });
+        }
+
+        public findManyById(ids: string[]) {
+            return Promise.reject<TEntity[]>("TODO");
+        }
+
+        public findManyByQuery(
+            andQueries?: Partial<TEntity>[],
+            orQueries?: Partial<TEntity>[]
+        ) {
+            return Promise.reject<TEntity[]>("TODO");
         }
 
 }

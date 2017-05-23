@@ -7,6 +7,8 @@ export interface Repository<T> {
     save(doc: T): Promise<T>;
     findAll(): Promise<T[]>;
     findById(id: string): Promise<T>;
+    findManyById(ids: string[]): Promise<T[]>;
+    findManyByQuery(andQueries?: Partial<T>[], orQueries?: Partial<T>[]): Promise<T[]>;
 }
 
 export type MovieRepository = Repository<Movie>;

@@ -1,5 +1,3 @@
-/*
-TODO
 import { SearchService as SearchServiceInterface } from "../interfaces/services";
 import { Movie } from "../model/movie";
 import { Actor } from "../model/actor";
@@ -15,9 +13,17 @@ export class SearchService implements SearchServiceInterface {
     
     public async search(query: string): Promise<Movie[]> {
 
-        const moviesWithMatchingTitle = await this._movieRepository.search(query);
-        const matchingActors = await this._actorRepository.search(query);
-        const matchingDirectors = await this._directorRepository.search(query);
+        const moviesWithMatchingTitle = await this._movieRepository.findManyByQuery(
+            [{ title: "%query%" }]
+        );
+
+        const matchingActors = await this._actorRepository.findManyByQuery(
+            [{ name: "%query%" }]
+        );
+
+        const matchingDirectors = await this._directorRepository.findManyByQuery(
+            [{ name: "%query%" }]
+        );
 
         const getMovieIds = (arr: Actor[] | Director[]) => {
             return arr.map(i => i.movies).reduce((p, c) => [...p, ...c], []);
@@ -32,7 +38,7 @@ export class SearchService implements SearchServiceInterface {
             ...movieIdsWithMatchingActor
         ];
 
-        const moviesWithMatchingActorOrDirector = await this._movieRepository.findById(movieIdsWithMatchingActorOrDirector);
+        const moviesWithMatchingActorOrDirector = await this._movieRepository.findManyById(movieIdsWithMatchingActorOrDirector);
 
         const matchingMovies = [
             ...moviesWithMatchingTitle,
@@ -42,5 +48,3 @@ export class SearchService implements SearchServiceInterface {
         return matchingMovies;
     }
 }
-
-*/
