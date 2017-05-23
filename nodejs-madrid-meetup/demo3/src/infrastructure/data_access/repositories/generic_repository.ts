@@ -2,7 +2,7 @@ import { injectable, unmanaged } from "inversify";
 import { Schema, Document, Model, SchemaDefinition } from "mongoose";
 import { DbClient } from "../db_client";
 import { dbClient } from "../../../domain/constants/decorators";
-import { Repository } from "../../../domain/interfaces/repositories";
+import { Repository, Query } from "../../../domain/interfaces/repositories";
 
 @injectable()
 export class GenericRepository<TEntity, TModel extends Document>
@@ -68,8 +68,8 @@ export class GenericRepository<TEntity, TModel extends Document>
         }
 
         public findManyByQuery(
-            andQueries?: Partial<TEntity>[],
-            orQueries?: Partial<TEntity>[]
+            andQueries?: Query<TEntity>,
+            orQueries?: Query<TEntity>
         ) {
             return Promise.reject<TEntity[]>("TODO");
         }

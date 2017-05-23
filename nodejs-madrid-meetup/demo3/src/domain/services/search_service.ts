@@ -13,16 +13,17 @@ export class SearchService implements SearchServiceInterface {
     
     public async search(query: string): Promise<Movie[]> {
 
-        const moviesWithMatchingTitle = await this._movieRepository.findManyByQuery(
-            [{ title: "%query%" }]
+        const moviesWithMatchingTitleOrSummary = await this._movieRepository.findManyByQuery(
+            { title: new RegExp(`.*${query}.*`) },
+            { summary: new RegExp(`.*${query}.*`) }
         );
 
         const matchingActors = await this._actorRepository.findManyByQuery(
-            [{ name: "%query%" }]
+            { name: new RegExp(`.*${query}.*`) }
         );
 
         const matchingDirectors = await this._directorRepository.findManyByQuery(
-            [{ name: "%query%" }]
+            { name: new RegExp(`.*${query}.*`) }
         );
 
         const getMovieIds = (arr: Actor[] | Director[]) => {
@@ -41,7 +42,7 @@ export class SearchService implements SearchServiceInterface {
         const moviesWithMatchingActorOrDirector = await this._movieRepository.findManyById(movieIdsWithMatchingActorOrDirector);
 
         const matchingMovies = [
-            ...moviesWithMatchingTitle,
+            ...moviesWithMatchingTitleOrSummary,
             ...moviesWithMatchingActorOrDirector
         ];
 
