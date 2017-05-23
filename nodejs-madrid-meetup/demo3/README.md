@@ -5,8 +5,7 @@
 Este ejemplo es parte de una presentación que tuvo lugar en
 el meetup de Node.js de Madrid. Las diapositivas de la presentación se puede encontrar [aquí](https://docs.google.com/presentation/d/12hK5z0wt4BlyOFhJBxVgQBTdvwTznKj3XttlvMwYgrY/present).
 
-Este ejemplo demuestra cómo implementar aplicaciones que se adhieren a la arquitectura cebolla. Esta arquitectura de
-capas puede representarse en un diagrama como sigue:
+Este ejemplo demuestra cómo integrar InversifyJS con Express y como implementar aplicaciones que se adhieren a la arquitectura cebolla. Esta arquitectura de capas puede representarse en un diagrama como sigue:
 
 ![](../assets/onion.png)
 
