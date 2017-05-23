@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { Controller, Get, RequestParam } from "inversify-express-utils";
-import { directorRepository } from "../ioc/decorators";
+import { directorRepository } from "../../domain/constants/decorators";
 import { DirectorRepository } from "../../domain/interfaces/repositories";
 
 @injectable()

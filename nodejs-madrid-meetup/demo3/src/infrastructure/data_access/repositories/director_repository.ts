@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import { Document } from "mongoose";
-import { DbClient } from "../database/database";
-import { dbClient } from "../ioc/decorators";
+import { DbClient } from "../db_client";
+import { dbClient } from "../../../domain/constants/decorators";
 import { GenericRepository } from "../repositories/generic_repository";
-import { Director } from "../../domain/model/director";
-import { DirectorRepository as DirectorRepositoryInterface } from "../../domain/interfaces/repositories";
+import { Director } from "../../../domain/model/director";
+import { DirectorRepository as DirectorRepositoryInterface } from "../../../domain/interfaces/repositories";
 
 export interface DirectorModel extends Director, Document {}
 

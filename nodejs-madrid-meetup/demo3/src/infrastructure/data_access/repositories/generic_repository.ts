@@ -1,8 +1,8 @@
 import { injectable, unmanaged } from "inversify";
 import { Schema, Document, Model, SchemaDefinition } from "mongoose";
-import { dbClient } from "../ioc/decorators";
-import { DbClient } from "../database/database";
-import { Repository } from "../../domain/interfaces/repositories";
+import { DbClient } from "../db_client";
+import { dbClient } from "../../../domain/constants/decorators";
+import { Repository } from "../../../domain/interfaces/repositories";
 
 @injectable()
 export class GenericRepository<TEntity, TModel
