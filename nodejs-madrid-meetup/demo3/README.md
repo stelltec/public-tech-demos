@@ -45,13 +45,5 @@ cd public-tech-demos/nodejs-madrid-meetup/demo3/
 ```
 
 ```sh
-npm install
-```
-
-```sh
-npm install -g typescript
-```
-
-```sh
-npm start
+docker-compose up
 ```

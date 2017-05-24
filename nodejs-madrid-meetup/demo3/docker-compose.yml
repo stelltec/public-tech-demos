@@ -4,11 +4,16 @@ services:
     build: .
     ports:
      - "8080:8080"
+    environment:
+    - process.env.APP_PORT=8080,
+    - process.env.DB_HOST=database
+    - process.env.DB_NAME=demo
+    - process.env.CACHE_HOST=cache
     links:
       - database
       - redis
 
-  redis:
+  cache:
     image: "redis:alpine"
 
   database:
