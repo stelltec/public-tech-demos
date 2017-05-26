@@ -7,6 +7,7 @@ import { DbClient, getDatabaseClient } from "../data_access/db_client";
 import { TYPES } from "../../domain/constants/types";
 
 export async function bootstrap(
+    container: Container,
     appPort: number,
     dbHost: string,
     dbName: string,
@@ -17,7 +18,6 @@ export async function bootstrap(
     const dbClient = await getDatabaseClient(dbHost, dbName);
 
     // Configure IoC container
-    const container = new Container();
     container.bind<DbClient>(TYPES.DbClient).toConstantValue(dbClient);
     container.load(...modules);
 

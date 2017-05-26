@@ -14,7 +14,7 @@ export interface Repository<T> {
     findAll(): Promise<T[]>;
     findById(id: string): Promise<T>;
     findManyById(ids: string[]): Promise<T[]>;
-    findManyByQuery(andQueries?: Query<T>, orQueries?: Query<T>): Promise<T[]>;
+    findManyByQuery(query?: Query<T>): Promise<T[]>;
 }
 
 export type MovieRepository = Repository<Movie>;

@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Controller, Get, RequestParam } from "inversify-express-utils";
-import { actorRepository } from "../../domain/constants/decorators";
-import { ActorRepository } from "../../domain/interfaces/repositories";
+import { actorRepository } from "../../../domain/constants/decorators";
+import { ActorRepository } from "../../../domain/interfaces/repositories";
 
 @injectable()
 @Controller("/api/ref/actors")

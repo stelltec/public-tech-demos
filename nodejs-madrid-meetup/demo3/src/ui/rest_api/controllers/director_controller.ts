@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Controller, Get, RequestParam } from "inversify-express-utils";
-import { directorRepository } from "../../domain/constants/decorators";
-import { DirectorRepository } from "../../domain/interfaces/repositories";
+import { directorRepository } from "../../../domain/constants/decorators";
+import { DirectorRepository } from "../../../domain/interfaces/repositories";
 
 @injectable()
 @Controller("/api/ref/directors")

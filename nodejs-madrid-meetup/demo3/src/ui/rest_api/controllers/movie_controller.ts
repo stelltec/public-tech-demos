@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Controller, Get, RequestParam } from "inversify-express-utils";
-import { movieRepository } from "../../domain/constants/decorators";
-import { MovieRepository } from "../../domain/interfaces/repositories";
+import { movieRepository } from "../../../domain/constants/decorators";
+import { MovieRepository } from "../../../domain/interfaces/repositories";
 
 @injectable()
 @Controller("/api/ref/movies")

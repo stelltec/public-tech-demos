@@ -1,3 +1,4 @@
+import { injectable } from "inversify";
 import { SearchService as SearchServiceInterface } from "../interfaces/services";
 import { Movie } from "../model/movie";
 import { Actor } from "../model/actor";
@@ -5,6 +6,7 @@ import { Director } from "../model/director";
 import { movieRepository, actorRepository, directorRepository } from "../constants/decorators";
 import { MovieRepository, DirectorRepository, ActorRepository } from "../interfaces/repositories";
 
+@injectable()
 export class SearchService implements SearchServiceInterface {
 
     @movieRepository private _movieRepository: MovieRepository;
@@ -13,9 +15,8 @@ export class SearchService implements SearchServiceInterface {
     
     public async search(query: string): Promise<Movie[]> {
 
-        const moviesWithMatchingTitleOrSummary = await this._movieRepository.findManyByQuery(
-            { title: new RegExp(`.*${query}.*`) },
-            { summary: new RegExp(`.*${query}.*`) }
+        const moviesWithMatchingTitle = await this._movieRepository.findManyByQuery(
+            { title: new RegExp(`.*${query}.*`) }
         );
 
         const matchingActors = await this._actorRepository.findManyByQuery(
@@ -42,7 +43,7 @@ export class SearchService implements SearchServiceInterface {
         const moviesWithMatchingActorOrDirector = await this._movieRepository.findManyById(movieIdsWithMatchingActorOrDirector);
 
         const matchingMovies = [
-            ...moviesWithMatchingTitleOrSummary,
+            ...moviesWithMatchingTitle,
             ...moviesWithMatchingActorOrDirector
         ];
 

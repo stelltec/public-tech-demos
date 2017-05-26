@@ -47,3 +47,68 @@ cd public-tech-demos/nodejs-madrid-meetup/demo3/
 ```sh
 docker-compose up
 ```
+
+## Servicios REST
+
+Podemos utilizar la siguiente llamada Ajax para invocar un serviceio REST:
+
+```js
+fetch("http://localhost:8080/api/ref/movies", {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json"
+    },
+}).then((r) => {
+    if (r.status === 200) {
+        r.json().then((j) => console.log(j));
+    } else {
+        console.log("ERROR", r.status);
+    }
+}).catch(e => console.log(e));
+```
+
+Los siguiente servicios estan disponibles:
+
+- HTTP GET `/api/ref/actors`
+- HTTP GET `/api/ref/actors:id`
+- HTTP GET `/api/ref/directors`
+- HTTP GET `/api/ref/directors/:id`
+- HTTP GET `/api/ref/movies`
+- HTTP GET `/api/ref/movies/:id`
+- HTTP GET `/api/ref/search/:query`
+- HTTP GET `/api/ref/secured` (Requiere un header `x-auth-token` valido)
+
+Podemos utilizar la siguiente llamada Ajax para invocar un serviceio REST con un
+header:
+
+```js
+fetch("http://localhost:8080/api/ref/secure", {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": "SOME_FAKE_CREDENTIAL"
+    },
+}).then((r) => {
+    if (r.status === 200) {
+        r.json().then((j) => console.log(j));
+    } else {
+        console.log("ERROR", r.status);
+    }
+}).catch(e => console.log(e));
+```
+
+```js
+fetch("http://localhost:8080/api/ref/secure", {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": "SOME_WRONG_FAKE_CREDENTIAL"
+    },
+}).then((r) => {
+    if (r.status === 200) {
+        r.json().then((j) => console.log(j));
+    } else {
+        console.log("ERROR", r.status);
+    }
+}).catch(e => console.log(e));
+```

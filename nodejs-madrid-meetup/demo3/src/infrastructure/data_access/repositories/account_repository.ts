@@ -20,10 +20,10 @@ export class AccountRepository
                 dbClient,
                 "Accounts",
                 {
-                    id: String,
                     username: String,
                     email: String,
-                    password: String
+                    password: String,
+                    roles: [String]
                 }
             );
 

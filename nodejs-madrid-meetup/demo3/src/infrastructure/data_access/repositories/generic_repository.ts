@@ -68,10 +68,16 @@ export class GenericRepository<TEntity, TModel extends Document>
         }
 
         public findManyByQuery(
-            andQueries?: Query<TEntity>,
-            orQueries?: Query<TEntity>
+            query: Query<TEntity>,
         ) {
-            return Promise.reject<TEntity[]>("TODO");
+            return new Promise<TEntity[]>((resolve, reject) => {
+                this.Model.find(query as any, (err, res) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(res.map((r) => this._readMapper(r)));
+                });
+            });
         }
 
 }

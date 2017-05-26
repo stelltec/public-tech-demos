@@ -1,4 +1,4 @@
-import { RentService } from "../../domain/interfaces/services";
+import { RentService } from "../../../domain/interfaces/services";
 
 export class RentController {
 
