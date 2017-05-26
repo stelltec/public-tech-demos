@@ -16,15 +16,27 @@ export class SearchService implements SearchServiceInterface {
     public async search(query: string): Promise<Movie[]> {
 
         const moviesWithMatchingTitle = await this._movieRepository.findManyByQuery(
-            { title: new RegExp(`.*${query}.*`) }
+            {
+                title: {
+                    $regex: new RegExp(query, "ig")
+                }
+            }
         );
 
         const matchingActors = await this._actorRepository.findManyByQuery(
-            { name: new RegExp(`.*${query}.*`) }
+            {
+                name: {
+                    $regex: new RegExp(query, "ig")
+                }
+            }
         );
 
         const matchingDirectors = await this._directorRepository.findManyByQuery(
-            { name: new RegExp(`.*${query}.*`) }
+            {
+                name: {
+                    $regex: new RegExp(query, "ig")
+                }
+            }
         );
 
         const getMovieIds = (arr: Actor[] | Director[]) => {

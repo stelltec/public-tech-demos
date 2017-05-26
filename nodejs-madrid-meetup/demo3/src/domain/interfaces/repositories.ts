@@ -6,7 +6,7 @@ import { Account } from "../model/account";
 import { Repository } from "../interfaces/repositories";
 
 export type Query<T> = {
-    [P in keyof T]?: T[P] | RegExp;
+    [P in keyof T]?: T[P] | { $regex: RegExp };
 };
 
 export interface Repository<T> {

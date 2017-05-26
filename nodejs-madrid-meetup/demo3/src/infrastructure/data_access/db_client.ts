@@ -12,7 +12,7 @@ export async function getDatabaseClient(dbHost: string, dbName: string) {
             reject(e);
         });
         db.once("open", () => {
-            console.error("Db conenction success:", connString);
+            console.log("Db conenction success:", connString);
             resolve(mongoose);
         });
     });

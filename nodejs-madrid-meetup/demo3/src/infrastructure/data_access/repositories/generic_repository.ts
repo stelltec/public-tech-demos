@@ -9,22 +9,16 @@ export class GenericRepository<TEntity, TModel extends Document>
     implements Repository<TEntity> {
         
         private _name: string;
-        private _readMapper: (model: TModel) => TEntity;
-        private _writeMapper: (entity: TEntity) => TModel;
         protected Model: Model<TModel>;
 
         public constructor (
             @dbClient dbClient: DbClient,
             @unmanaged() name: string,
-            @unmanaged() schemaDefinition: SchemaDefinition,
-            @unmanaged() readMapper?: (model: TModel) => TEntity,
-            @unmanaged() writeMapper?: (entity: TEntity) => TModel
+            @unmanaged() schemaDefinition: SchemaDefinition
         ) {
             this._name = name;
             const schema = new Schema(schemaDefinition, { collection: this._name });
             this.Model = dbClient.model<TModel>(this._name, schema);
-            this._readMapper = readMapper ? readMapper : (model: TModel) => model.toJSON() as TEntity;
-            this._writeMapper = writeMapper ? writeMapper : (entity: TEntity) => new this.Model(entity);
         }
 
         // We wrap the mongoose API here so we can use async / await
@@ -35,7 +29,8 @@ export class GenericRepository<TEntity, TModel extends Document>
                     if (err) {
                         reject(err);
                     }
-                    resolve(res.map((r) => this._readMapper(r)));
+                    const result = res.map((r) => this._readMapper(r));
+                    resolve(result);
                 });
             });
         }
@@ -46,7 +41,8 @@ export class GenericRepository<TEntity, TModel extends Document>
                     if (err) {
                         reject(err);
                     }
-                    resolve(this._readMapper(res));
+                    const result = this._readMapper(res);
+                    resolve(result);
                 });
             });
         }
@@ -64,7 +60,15 @@ export class GenericRepository<TEntity, TModel extends Document>
         }
 
         public findManyById(ids: string[]) {
-            return Promise.reject<TEntity[]>("TODO");
+            return new Promise<TEntity[]>((resolve, reject) => {
+                const query = { _id: { $in : ids } };
+                this.Model.find(query, (err, res) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(res.map((r) => this._readMapper(r)));
+                });
+            });
         }
 
         public findManyByQuery(
@@ -78,6 +82,13 @@ export class GenericRepository<TEntity, TModel extends Document>
                     resolve(res.map((r) => this._readMapper(r)));
                 });
             });
+        }
+
+        private _readMapper(model: TModel) {
+            const obj: any = model.toJSON();
+            Object.defineProperty(obj, "id", Object.getOwnPropertyDescriptor(obj, "_id"));
+            delete obj["_id"];
+            return obj as TEntity;
         }
 
 }

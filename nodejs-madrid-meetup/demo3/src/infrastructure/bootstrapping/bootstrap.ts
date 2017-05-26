@@ -1,4 +1,5 @@
 import { Container, ContainerModule } from "inversify";
+import * as express from "express";
 import { InversifyExpressServer } from "inversify-express-utils";
 import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
@@ -14,39 +15,48 @@ export async function bootstrap(
     ...modules: ContainerModule[]
 ) {
 
-    // Configure database client
-    const dbClient = await getDatabaseClient(dbHost, dbName);
+    if (container.isBound(TYPES.App) === false) {
 
-    // Configure IoC container
-    container.bind<DbClient>(TYPES.DbClient).toConstantValue(dbClient);
-    container.load(...modules);
+        const dbClient = await getDatabaseClient(dbHost, dbName);
+        container.bind<DbClient>(TYPES.DbClient).toConstantValue(dbClient);
+        container.load(...modules);
 
-    // Configure express server
-    const server = new InversifyExpressServer(container);
+        // Configure express server
+        const server = new InversifyExpressServer(container);
 
-    server.setConfig((app) => {
+        server.setConfig((app) => {
 
-        // Configure requests body parsing
-        app.use(bodyParser.urlencoded({ extended: true }));
-        app.use(bodyParser.json());
+            // Disable default cache
+            app.set('etag', false);
 
-        // Adds some decurity defaults
-        app.use(helmet());
+            // Configure requests body parsing
+            app.use(bodyParser.urlencoded({ extended: true }));
+            app.use(bodyParser.json());
 
-        // Log all requets that hit the server
-        app.use(reqMiddleware);
+            // Adds some decurity defaults
+            app.use(helmet());
 
-    });
+            // Log all requets that hit the server
+            app.use(reqMiddleware);
 
-    server.setErrorConfig((app) => {
-      // Catch and log all exceptions
-      app.use(exceptionLoggerMiddleware);
-    });
+        });
 
-    const app = server.build();
+        server.setErrorConfig((app) => {
+        // Catch and log all exceptions
+        app.use(exceptionLoggerMiddleware);
+        });
 
-    // Run express server
-    console.log(`Application listening on port ${appPort}...`);
-    app.listen(appPort);
+        const app = server.build();
+
+        // Run express server
+        console.log(`Application listening on port ${appPort}...`);
+        app.listen(appPort);
+
+        container.bind<express.Application>(TYPES.App).toConstantValue(app);
+
+        return app;
+    } else {
+        return container.get<express.Application>(TYPES.App);
+    }
 
 }
