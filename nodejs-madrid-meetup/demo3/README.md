@@ -76,7 +76,7 @@ fetch("http://localhost:8080/api/secure", {
     method: "GET",
     headers: {
         "Content-Type": "application/json",
-        "x-auth-token": "SOME_FAKE_CREDENTIAL"
+        "x-auth-token": "SOME_VALID_DEMO_CREDENTIAL"
     },
 }).then((r) => {
     if (r.status === 200) {
@@ -94,7 +94,7 @@ fetch("http://localhost:8080/api/secure", {
     method: "GET",
     headers: {
         "Content-Type": "application/json",
-        "x-auth-token": "SOME_WRONG_FAKE_CREDENTIAL"
+        "x-auth-token": "SOME_WRONG_DEMO_CREDENTIAL"
     },
 }).then((r) => {
     if (r.status === 200) {
