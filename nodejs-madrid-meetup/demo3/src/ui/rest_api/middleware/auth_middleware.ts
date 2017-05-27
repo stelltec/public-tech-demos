@@ -9,7 +9,7 @@ async function getEmailFromToken(token: string) {
     // in real life you want to use something like JWT
     // https://github.com/auth0/node-jsonwebtoken
     return new Promise<string|null>((resolve, reject) => {
-        if (token === "SOME_FAKE_CREDENTIAL") {
+        if (token === "SOME_VALID_DEMO_CREDENTIAL") {
             resolve("test.test@test.com");
         } else {
             resolve(null);
