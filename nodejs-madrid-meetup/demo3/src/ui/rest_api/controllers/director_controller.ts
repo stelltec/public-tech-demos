@@ -4,7 +4,7 @@ import { directorRepository } from "../../../domain/constants/decorators";
 import { DirectorRepository } from "../../../domain/interfaces/repositories";
 
 @injectable()
-@Controller("/api/ref/directors")
+@Controller("/api/directors")
 export class DirectorController {
 
     @directorRepository public _directorRepository: DirectorRepository;

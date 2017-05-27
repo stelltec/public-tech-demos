@@ -5,5 +5,6 @@ export const TYPES = {
     DirectorRepository: Symbol("DirectorRepository"),
     ActorRepository: Symbol("ActorRepository"),
     AccountRepository: Symbol("AccountRepository"),
-    SearchService: Symbol("SearchService")
+    SearchService: Symbol("SearchService"),
+    RentService: Symbol("RentService")
 };

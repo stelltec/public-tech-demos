@@ -1,5 +1,5 @@
 import * as request from "supertest";
-import { runApp } from "../src/run_app";
+import { runApp } from "../src/index";
 import { expect } from "chai";
 import { Actor } from "../src/domain/model/actor";
 
@@ -21,12 +21,12 @@ describe("ActorController", () => {
     expect(expectedActor.movies).to.eq(actualActor.movies);
   }
 
-  it("GET /api/ref/actors", async () => {
+  it("GET /api/actors", async () => {
     
     const app = await runApp();
 
     request(app)
-      .get("/api/ref/actors")
+      .get("/api/actors")
       .set("Accept", "application/json")
       .expect(200)
       .end((err, res) => {
@@ -36,12 +36,12 @@ describe("ActorController", () => {
 
   });
 
-  it("GET /api/ref/actors/:id", async () => {
+  it("GET /api/actors/:id", async () => {
 
     const app = await runApp();
 
     request(app)
-      .get("/api/ref/actors/5921e3954c2ac9f6162a780a")
+      .get("/api/actors/5921e3954c2ac9f6162a780a")
       .set("Accept", "application/json")
       .expect(200)
       .end((err, res) => {

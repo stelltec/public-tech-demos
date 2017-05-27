@@ -8,10 +8,8 @@ export interface RenResult {
 export interface RentService {
 
     rentMoview(
-        movieId: string, 
-        startDate: Date,
-        numberOfDays: number,
-        charge: boolean
+        accoountId: string,
+        movieId: string
     ): Promise<RenResult>;
 
 }

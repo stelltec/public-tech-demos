@@ -4,7 +4,7 @@ import { SearchService } from "../../../domain/interfaces/services";
 import { searchService } from "../../../domain/constants/decorators";
 
 @injectable()
-@Controller("/api/ref/search")
+@Controller("/api/search")
 export class SearchController {
 
     @searchService private _searchService: SearchService;

@@ -5,7 +5,7 @@ import { authMiddleware } from "../middleware/auth_middleware";
 // This is an example of a controller protected by the auth middleware
 
 @injectable()
-@Controller("/api/ref/secure", authMiddleware({ role: "admin" }))
+@Controller("/api/secure", authMiddleware({ role: "admin" }))
 export class SecureController {
 
     @Get("/")

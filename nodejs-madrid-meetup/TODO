@@ -1,9 +1,0 @@
-# TODO
-
-- [ ] Add example supertest
-- [ ] Finish generic `GenericRepository.prototype.findManyById`
-- [ ] Finish `/api/ref/search/:query`
-- [ ] Implement `rentMoview`
-- [ ] Implement Dockerfile and docker-compose file
-- [ ] Implement Demo 1
-- [ ] Implement Demo 2

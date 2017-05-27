@@ -4,7 +4,7 @@ import { actorRepository } from "../../../domain/constants/decorators";
 import { ActorRepository } from "../../../domain/interfaces/repositories";
 
 @injectable()
-@Controller("/api/ref/actors")
+@Controller("/api/actors")
 export class ActorController {
 
     @actorRepository public _actorRepository: ActorRepository;

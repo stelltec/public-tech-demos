@@ -1,14 +1,20 @@
+import { injectable } from "inversify";
+import { Controller, Get, RequestParam, RequestHeaders } from "inversify-express-utils";
 import { RentService } from "../../../domain/interfaces/services";
+import { rentService } from "../../../domain/constants/decorators";
 
+@injectable()
+@Controller("/api/rent")
 export class RentController {
 
-    private _rentService: RentService;
+    @rentService private _rentService: RentService;
 
-    public constructor(
-        rentService: RentService
+    @Get("/:id")
+    public get(
+        @RequestParam("id") movieId: string,
+        @RequestHeaders("x-auth-token") accountId: string
     ) {
-        this._rentService = rentService;
+        this._rentService.rentMoview(movieId, accountId);
     }
 
 }
-

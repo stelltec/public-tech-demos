@@ -4,4 +4,4 @@ This repo contains source code for public tech demos (e.g. meetups, conferences,
 
 The following list contains links to the source code of all our public demos:
 
-- :es: [Node.js Madrid Meetup](./nodejs-madrid-meetup/README.md) Este grupo de ejemplos demuestra cómo podemos implementar una aplicación `Node.js` utilizando `Express` con `TypeScriot`, `Mongoose`, `InversifyJS` & `inversify-express-utils`.
+- [Node.js Madrid Meetup (May 31, 2017)](./nodejs-madrid-meetup/README.md) Writing `Node.js` applications using the onion architecture with `Express`, `TypeScript`, `Mongoose`, `InversifyJS` & `inversify-express-utils`.
