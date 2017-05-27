@@ -1,16 +1,15 @@
-import * as request from "supertest";
-import { runApp } from "../src/index";
 import { expect } from "chai";
 import { Actor } from "../src/domain/model/actor";
+import { httpGet } from "./test_utils"; 
 
 describe("ActorController", () => {
 
   const expectedActor1: Actor = {
-    id: '5921e3954c2ac9f6162a780a',
-    name: 'Zoe Saldana',
+    id: "5921e3954c2ac9f6162a780a",
+    name: "Zoe Saldana",
     yearBorn: 1978,
-    nationality: 'US',
-    movies: [ '5921ecb14c2ac9f6162a7811' ]
+    nationality: "US",
+    movies: [ "5921ecb14c2ac9f6162a7811" ]
   };
 
   function assertActorIsEqual(expectedActor: Actor, actualActor: Actor) {
@@ -18,37 +17,17 @@ describe("ActorController", () => {
     expect(expectedActor.name).to.eq(actualActor.name);
     expect(expectedActor.yearBorn).to.eq(actualActor.yearBorn);
     expect(expectedActor.nationality).to.eq(actualActor.nationality);
-    expect(expectedActor.movies).to.eq(actualActor.movies);
+    expect(expectedActor.movies[0]).to.eq(actualActor.movies[0]);
   }
 
   it("GET /api/actors", async () => {
-    
-    const app = await runApp();
-
-    request(app)
-      .get("/api/actors")
-      .set("Accept", "application/json")
-      .expect(200)
-      .end((err, res) => {
-        expect(err).to.eq(null);
-        assertActorIsEqual(expectedActor1, res.body[0]);
-      });
-
+    const body = await httpGet("/api/actors");
+    assertActorIsEqual(expectedActor1, body[0]);
   });
 
   it("GET /api/actors/:id", async () => {
-
-    const app = await runApp();
-
-    request(app)
-      .get("/api/actors/5921e3954c2ac9f6162a780a")
-      .set("Accept", "application/json")
-      .expect(200)
-      .end((err, res) => {
-        expect(err).to.eq(null);
-        assertActorIsEqual(expectedActor1, res.body);
-      });
-
+    const body = await httpGet("/api/actors/5921e3954c2ac9f6162a780a");
+    assertActorIsEqual(expectedActor1, body);
   });
 
 });

@@ -5,4 +5,6 @@ export interface Movie {
     releaseMonth: number;
     releaseDay: number;
     summary: string;
+    directors: string[];
+    actors: string[];
 }

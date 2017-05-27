@@ -27,7 +27,7 @@ export async function bootstrap(
         server.setConfig((app) => {
 
             // Disable default cache
-            app.set('etag', false);
+            app.set("etag", false);
 
             // Configure requests body parsing
             app.use(bodyParser.urlencoded({ extended: true }));

@@ -67,7 +67,6 @@ The application exposes a few REST endpoints:
 - HTTP GET `/api/movies`
 - HTTP GET `/api/movies/:id`
 - HTTP GET `/api/search/:query`
-- HTTP GET `/api/rent/:id`
 - HTTP GET `/api/secured` (Requieres a valid `x-auth-token` header)
 
 You can use the following code snippet to call the secured endpoint:
