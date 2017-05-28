@@ -1,4 +1,4 @@
-function findUserBySurname(users, surname) {
+function filterUserBySurname(users, surname) {
     return users.filter(u => u.surname === surname);
 }
 
@@ -8,7 +8,7 @@ var users1 = [
     { surname: "Williams", age: 14 }
 ];
 
-findUserBySurname(users1, "Smith"); // [{ surname: "Smith", age: 28 }]
+filterUserBySurname(users1, "Smith"); // [{ surname: "Smith", age: 28 }]
 
 var users2 = [
     { familyName: "Smith", age: 28 },
@@ -16,4 +16,4 @@ var users2 = [
     { familyName: "Williams", age: 14 }
 ];
 
-findUserBySurname(users2, "Smith"); // []
+filterUserBySurname(users2, "Smith"); // []
