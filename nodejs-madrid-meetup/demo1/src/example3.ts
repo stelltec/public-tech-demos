@@ -1,6 +1,6 @@
 // Example of lookup type T[K]
 // Learn more @ https://blog.mariusschulz.com/2017/01/06/typescript-2-1-keyof-and-lookup-types
-function findByProperty<T extends { [key: string]: any }, K extends keyof T>(property: K) {
+function findByProperty<T, K extends keyof T>(property: K) {
     return (entities: T[], value: T[K]) => {
         return entities.filter(e => e[property] === value);
     }
