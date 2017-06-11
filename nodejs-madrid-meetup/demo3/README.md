@@ -41,13 +41,13 @@ mongorestore -d demo dump/demo/
 Run the tests:
 
 ```sh
-npm test
+./bin/test.sh
 ```
 
 Run the app:
 
 ```sh
-npm start
+./bin/run.sh
 ```
 
 Open:
