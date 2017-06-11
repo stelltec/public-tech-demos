@@ -41,8 +41,12 @@ export class GenericRepository<TEntity, TModel extends Document>
                     if (err) {
                         reject(err);
                     }
-                    const result = this._readMapper(res);
-                    resolve(result);
+                    if (res === null) {
+                        reject();
+                    } else {
+                        const result = this._readMapper(res);
+                        resolve(result);
+                    }
                 });
             });
         }
